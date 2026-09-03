@@ -481,6 +481,23 @@ app.get('/api/ping-notion', async (req, res) => {
 });
 
 // ---------------------------------------------------------------------------
+// GET /api/get-database-name — returns the Notion database title
+// ---------------------------------------------------------------------------
+app.get('/api/get-database-name', async (req, res) => {
+  const { NOTION_API_KEY, NOTION_DATABASE_ID } = process.env;
+  if (!NOTION_API_KEY || !NOTION_DATABASE_ID)
+    return res.status(400).json({ success: false, message: 'Notion credentials not configured.' });
+  try {
+    const notion = makeNotionClient();
+    const db = await notion.databases.retrieve({ database_id: NOTION_DATABASE_ID });
+    const name = db.title?.[0]?.plain_text ?? db.data_sources?.[0]?.name ?? '(untitled)';
+    return res.json({ success: true, name });
+  } catch (err) {
+    return res.status(err.status ?? 500).json({ success: false, message: notionErrorMessage(err) });
+  }
+});
+
+// ---------------------------------------------------------------------------
 // GET /api/fetch-title?url=... — extract page title from a URL server-side
 // Prefers og:title, falls back to <title>. Stops streaming after </title>.
 // ---------------------------------------------------------------------------
