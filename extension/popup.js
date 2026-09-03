@@ -29,10 +29,24 @@ const TAG_PALETTE = {
 document.addEventListener('DOMContentLoaded', () => {
   loadTags();
   loadFromActiveTab();
+  loadDatabaseName();
   setupTagInput();
   setupUrlBlur();
   setupFormHandlers();
 });
+
+// ---------------------------------------------------------------------------
+// Database name — shown in the footer so users can confirm the right database
+// ---------------------------------------------------------------------------
+async function loadDatabaseName() {
+  try {
+    const res  = await fetch(`${API_BASE}/api/get-database-name`);
+    const data = await res.json();
+    if (data.success && data.name) {
+      document.getElementById('dbName').textContent = data.name;
+    }
+  } catch { /* leave as ellipsis if server unreachable */ }
+}
 
 // ---------------------------------------------------------------------------
 // Active tab auto-fill (replaces clipboard check from the web UI)
