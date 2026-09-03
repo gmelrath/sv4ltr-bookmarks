@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bookmark to Notion</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <h1>Save Bookmark to Notion</h1>
+
+  <form id="bookmarkForm" novalidate>
+
+    <!-- URL -->
+    <div class="form-group">
+      <div class="field-label">
+        <label for="url">URL <span class="required">*</span></label>
+        <span id="autofillBadge" class="autofill-badge" style="display:none">from tab</span>
+      </div>
+      <input
+        type="url"
+        id="url"
+        name="url"
+        placeholder="https://example.com/article"
+        autocomplete="off"
+      />
+    </div>
+
+    <!-- Title -->
+    <div class="form-group">
+      <div class="field-label">
+        <label for="title">Title <span class="required">*</span></label>
+        <span id="titleSpinner" class="spinner hidden"></span>
+        <span id="titleFetchHint" class="hint" style="display:none">fetching…</span>
+      </div>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        placeholder="Article or page title"
+      />
+    </div>
+
+    <!-- Tags -->
+    <div class="form-group">
+      <div class="field-label">
+        <label for="tagInput">Tags</label>
+        <span class="hint">— click existing or type a new one</span>
+      </div>
+      <div class="tags-wrapper" id="tagsWrapper">
+        <div id="tagChips" class="tag-chips"></div>
+        <div id="customTagChips" class="tag-chips"></div>
+        <div id="tagsLoading" class="tags-loading">
+          <span class="spinner"></span> Loading tags…
+        </div>
+        <input
+          type="text"
+          id="tagInput"
+          class="tag-input"
+          placeholder="Type a tag and press Enter…"
+          autocomplete="off"
+          style="display:none"
+        />
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="submit" id="submitBtn">Save Bookmark</button>
+      <button type="button" id="pingBtn" class="ping-link">Test connection</button>
+    </div>
+
+  </form>
+
+  <div id="status"></div>
+
+  <hr class="divider" />
+  <p class="footer-note">Saving to: <strong style="color:#999">Things to Read…</strong></p>
+
+  <script src="popup.js"></script>
+</body>
+</html>

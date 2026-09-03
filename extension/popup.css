@@ -1,0 +1,234 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #fff;
+  color: #1a1a1a;
+  width: 400px;
+  padding: 1.75rem 1.75rem 1.5rem;
+}
+
+h1 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+}
+
+/* ---- Form fields ---- */
+.form-group { margin-bottom: 1.1rem; }
+
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.35rem;
+}
+
+label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #444;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.required { color: #e53e3e; }
+
+.hint {
+  font-size: 0.78rem;
+  font-weight: 400;
+  text-transform: none;
+  color: #999;
+  letter-spacing: 0;
+}
+
+input[type="text"],
+input[type="url"] {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.93rem;
+  font-family: inherit;
+  color: #1a1a1a;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  background: #fff;
+}
+input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+}
+
+/* ---- Auto-fill badge ---- */
+.autofill-badge {
+  font-size: 0.72rem;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ---- Spinner ---- */
+.spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #d1d5db;
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner.hidden { display: none; }
+
+/* ---- Tags ---- */
+.tags-wrapper {
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  padding: 0.5rem 0.6rem 0.4rem;
+  background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  cursor: text;
+}
+.tags-wrapper:focus-within {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+}
+
+.tag-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.4rem;
+}
+.tag-chips:empty { display: none; }
+
+/* Existing Notion tags */
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: opacity 0.1s, border-color 0.1s, filter 0.1s;
+  font-family: inherit;
+  line-height: 1.4;
+  user-select: none;
+}
+.tag-chip:not(.selected) { opacity: 0.55; }
+.tag-chip:hover { opacity: 1; }
+.tag-chip.selected { border-color: currentColor; opacity: 1; filter: saturate(1.2); }
+.tag-chip.selected::before {
+  content: '✓';
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+/* Custom (new) tags */
+.tag-chip.custom {
+  background: #f3f4f6;
+  color: #374151;
+  border-color: #9ca3af;
+  opacity: 1;
+}
+.tag-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  line-height: 1;
+  padding: 0;
+  color: inherit;
+  opacity: 0.6;
+  font-family: inherit;
+  margin-left: 1px;
+}
+.tag-remove:hover { opacity: 1; }
+
+/* New tag input inside the wrapper */
+.tag-input {
+  border: none;
+  outline: none;
+  font-size: 0.83rem;
+  font-family: inherit;
+  color: #1a1a1a;
+  padding: 0.15rem 0.25rem;
+  min-width: 140px;
+  width: 100%;
+  background: transparent;
+}
+.tag-input::placeholder { color: #bbb; }
+
+/* Tags loading skeleton */
+.tags-loading {
+  font-size: 0.82rem;
+  color: #bbb;
+  padding: 0.15rem 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* ---- Submit row ---- */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+button[type="submit"] {
+  background: #2d2d2d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem 1.5rem;
+  font-size: 0.93rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+button[type="submit"]:hover { background: #444; }
+button[type="submit"]:disabled { background: #aaa; cursor: not-allowed; }
+
+.ping-link {
+  font-size: 0.82rem;
+  color: #bbb;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+.ping-link:hover { color: #555; }
+
+/* ---- Status banner ---- */
+#status {
+  margin-top: 1.25rem;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  display: none;
+}
+#status.success { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+#status.error   { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
+#status .status-label { font-weight: 600; margin-bottom: 0.2rem; }
+#status a { color: inherit; font-size: 0.82rem; margin-top: 0.3rem; display: inline-block; }
+
+.divider { border: none; border-top: 1px solid #eee; margin: 1.5rem 0; }
+.footer-note { font-size: 0.78rem; color: #bbb; text-align: center; }
